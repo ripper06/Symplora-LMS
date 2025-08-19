@@ -4,13 +4,13 @@ const {ServerConfig} = require('../config')
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const password = "Symplora-Hr@12345"; // default HR password
+    const password = ServerConfig.HR_PASSWORD; // default HR password
     const saltRounds = Number(ServerConfig.BCRYPT_SALT_ROUNDS) || 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 
     await queryInterface.bulkInsert("Users", [
       {
-        email: "hr@company.com",
+        email: ServerConfig.HR_EMAIL,
         passwordHash,
         role: "HR",
         employeeId: null, // HR not linked to Employee

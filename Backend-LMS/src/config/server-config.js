@@ -9,4 +9,6 @@ module.exports = {
     BCRYPT_SALT_ROUNDS : process.env.BCRYPT_SALT_ROUNDS,
     JWT_SECRET : process.env.JWT_SECRET,
     JWT_EXPIRES : process.env.JWT_EXPIRES,
+    HR_EMAIL : process.env.HR_EMAIL,
+    HR_PASSWORD : process.env.HR_PASSWORD
 }

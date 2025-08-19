@@ -4,6 +4,7 @@
   "description": "A basic starter boilerplate project for node",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "npx nodemon src/index.js"
   },
   "author": "RANJAN",
