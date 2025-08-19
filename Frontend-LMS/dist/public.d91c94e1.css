@@ -1,0 +1,122 @@
+body {
+  background-color: #f5f5f5;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+}
+
+.login-container {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 0 10px #0000001a;
+}
+
+.login-form {
+  flex-direction: column;
+  display: flex;
+}
+
+.login-form input {
+  margin: .5rem 0;
+  padding: .5rem;
+  font-size: 1rem;
+}
+
+.login-form button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #4caf50;
+  border: none;
+  margin-top: 1rem;
+  padding: .5rem;
+}
+
+.error {
+  color: red;
+  margin-top: .5rem;
+}
+
+.dashboard-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.dashboard-section {
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 20px 0;
+  padding: 15px;
+  box-shadow: 0 2px 5px #0000001a;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.table th, .table td {
+  text-align: left;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+}
+
+.table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.status-badge {
+  text-align: center;
+  border-radius: 4px;
+  min-width: 80px;
+  padding: 4px 8px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.status-badge.approved {
+  color: #155724;
+  background-color: #d4edda;
+}
+
+.status-badge.rejected {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+.status-badge.pending {
+  color: #856404;
+  background-color: #fff3cd;
+}
+
+.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.dashboard-container h1, .dashboard-container h2 {
+  margin-bottom: 10px;
+}
+
+button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+/*# sourceMappingURL=public.d91c94e1.css.map */
