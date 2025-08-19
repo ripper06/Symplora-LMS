@@ -1,79 +1,157 @@
-This is a base nodejs project template, which anyone can use it as it has been prepared keeping some of the important code principles and project management recommendations. Feel free to change anything.
+# 🚀 Leave Management System (Backend)
 
-`src` -> Inside the src folder all actual source code regarding the project will reside, this will not include any kind of tests. (You might create separete test folder)
+## 📌 Project Structure Overview
 
-Lets take a look inside `src` folder
+Inside the `src` folder resides all the actual source code for the project (excluding tests, which can be placed in a separate `test` folder):
 
-- `config` -> In this folder anything and everything regarding any configuration or setup of a library or module will be done. For example setting up `dotenv` so that we can use the enviornment variable anywhere in the cleaner fashion, this is done in the `server-config.js` file.One more example is setting up logging library that can help u prepare meaningful logs, so configuration for this libray should also be done here.
+- `config`  
+  Contains configuration and setup for libraries or modules.  
+  Example: Setting up `dotenv` for environment variables in `server-config.js`, configuring logging, etc.
 
-- `routes` -> In the route folder, we register a route and the corrosponding middlewares and controllers to it.
+- `routes`  
+  Registers routes along with their corresponding middlewares and controllers.
 
-- `middlewares` -> They are just going to intercept the incoming requests where we can write our validators, authintecators etc.
+- `middlewares`  
+  Intercepts incoming requests for validation, authentication, and other pre-processing.
 
-- `controllers` -> They are kind of last middlewares as post them you call your business layerto execute the business logic. In controller we just receive the incoming requests and data and then pass it to the business layer, once business layer returns an output, we structure the API response in contrllers and send the output.
+- `controllers`  
+  Act as the last middleware, receiving requests and passing data to the business layer. They format the response after the business logic executes.
 
-- `repositories` -> This folder contains all the logic using which we interact the DB by writing queries, all the reaw querries or ORM queries go here.
+- `repositories`  
+  Handles database interaction logic, including raw queries and ORM queries.
 
-- `Services` -> Contains the business logic and interacts with the repositories for data from the data base.
+- `services`  
+  Contains business logic and communicates with repositories to fetch or store data.
 
-- `Utils` -> Contains helper methods, error classes etc.
+- `utils`  
+  Helper functions, error classes, and other utility methods.
 
+---
 
-### Setup the project
-- Download this template from github and open it in your favourite text editor.
-- Go inside the folder and execute the following command :
-```
+## ⚙️ Setup Instructions
+
+1. Download this template from GitHub and open it in your favorite code editor.
+
+2. Inside the project folder, install dependencies:
 npm install
-```
 
-- In the root directory crete a `.env` file and add the following variables.
-    ```
-        PORT = <port number of your choice>
+text
 
-    ```
-     ex :
+3. Create a `.env` file in the root directory with these environment variables:
+PORT=<port number of your choice>
 
-    ```
-        PORT = 4000
+Node mailer email service
+EMAIL_USER=<email_id_to_send_mails>
+EMAIL_PASS=<email_password>
 
-    ```
-- inside the `src/config` folder create a file named as `config.json` and write the following code in it :
- ```
- {
-  "development": {
-    "username": "root",
-    "password": "mypassword",
-    "database": "database_development",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
+BCRYPT_SALT_ROUNDS=<salt_number>
+JWT_SECRET=<super_secure_random_string>
+JWT_EXPIRES=<expiry_time>
+
+HR_EMAIL="hr@company.com"
+HR_PASSWORD="Symplora-Hr@12345"
+
+text
+
+4. Database Configuration  
+Inside the `src/config` folder, create a `config.json` file with this content (modify as per your setup):
+
+{
+"development": {
+"username": "root",
+"password": "mypassword",
+"database": "database_development",
+"host": "127.0.0.1",
+"dialect": "mysql"
+},
+"test": {
+"username": "root",
+"password": null,
+"database": "database_test",
+"host": "127.0.0.1",
+"dialect": "mysql"
+},
+"production": {
+"username": "root",
+"password": null,
+"database": "database_production",
+"host": "127.0.0.1",
+"dialect": "mysql"
 }
- ``` 
- OR
-- You can go inside `src` folder and execute followingcommand :
-```npx sequelize init```
-That will create migrations and seeders folder along with confif.js inside congif file in`src`.
+}
 
+text
 
-- If u are setting up your development enviornment, then write your username and password of your DB and in dialect mension whatever DB u r using EG. mysql, mariadb etc.
+Alternatively, you can initialize Sequelize setup by running:
+npx sequelize init
 
-- If you are setting up test or production enviornment, make sure you also replace the host with the hoasted db url.
+text
+This creates `migrations`, `seeders`, and `config.js` inside the `src/config` folder.
 
-- To run the server execute :
-    ```
-    npm run dev
-    ```
+5. Run migrations:
+npx sequelize db:migrate
+
+text
+
+(Optional) Seed the initial HR user:
+npx sequelize db:seed:all
+
+text
+
+6. To start the server in development mode:
+npm run dev
+
+text
+
+---
+
+## 🔑 API Endpoints
+
+### Auth
+- `POST /api/v1/auth/login` — Login (returns JWT)  
+- `POST /api/v1/auth/change-password` — Change password
+
+### Employees
+- `POST /api/v1/employees` — Create employee (HR only)  
+- `GET /api/v1/employees` — List employees (HR/Admin)  
+- `GET /api/v1/employees/:id` — Get employee by ID  
+- `PUT /api/v1/employees/:id` — Update employee (HR/Admin)  
+- `DELETE /api/v1/employees/:id` — Delete employee (HR/Admin)  
+- `GET /api/v1/employees/:id/leave-balance` — Get employee’s leave balance
+
+### Leaves
+- `POST /api/v1/leaves/apply` — Employee applies for leave  
+- `GET /api/v1/leaves/me` — Employee views own leaves  
+- `PUT /api/v1/leaves/:id/validate` — HR approves/rejects leave  
+- `GET /api/v1/leaves/all` — HR views all leave requests
+
+---
+
+## 🛡️ Edge Cases Handled
+- Leave applied before joining date  
+- End date before start date  
+- Requesting more days than available balance  
+- Overlapping leave requests  
+- Employee not found  
+- Unauthorized role access
+
+---
+
+## 📈 Potential Improvements
+- Multiple leave types (casual, sick, maternity, etc.)  
+- Leave carry-forward to next year  
+- Email/Slack notifications for leave approval  
+- Employee & HR dashboards (frontend)  
+- CI/CD pipeline with automated tests
+
+---
+
+## 🖼️ Visuals
+
+![Leave Management System Flowchart](Leave Management System Flowchart.png)  
+![Screenshot 1](Screenshot 2025-08-19 115625.png)  
+![Screenshot 2](Screenshot 2025-08-19 115642.png)  
+![Screenshot 3](Screenshot 2025-08-19 115715.png)  
+![Screenshot 4](Screenshot 2025-08-19 115727.png)
+
+---

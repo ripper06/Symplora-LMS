@@ -14,7 +14,6 @@ async getByEmail(email) {
     }
     return user;
   } catch (error) {
-    Logger.error("Error in getByEmail:", error);
     throw error;
   }
 }
